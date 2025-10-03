@@ -1,6 +1,5 @@
 # Entorno virtual
 myenv/
-env/
 
 # Archivos de base de datos
 db.sqlite3
