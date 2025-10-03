@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{% if object %}Editar{% else %}Crear{% endif %} Evento{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white"><h4 class="mb-0">{% if object %}Editar{% else %}Crear{% endif %} evento</h4></div>
+  <div class="card-body">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="mb-3">{{ form.nombre.label_tag }} {{ form.nombre }} {{ form.nombre.errors }}</div>
+      <div class="mb-3">{{ form.fecha.label_tag }} {{ form.fecha }} {{ form.fecha.errors }}</div>
+      <div class="mb-3">{{ form.ubicacion.label_tag }} {{ form.ubicacion }} {{ form.ubicacion.errors }}</div>
+      <div class="mb-3">{{ form.asistentes.label_tag }} {{ form.asistentes }} {{ form.asistentes.errors }}</div>
+      <button class="btn btn-success"> Guardar</button>
+      <a class="btn btn-secondary" href="{% url 'evento_list' %}">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

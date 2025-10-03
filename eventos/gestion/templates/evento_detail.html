@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Detalle de Evento{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header bg-dark text-white"><h4 class="mb-0">{{ object.nombre }}</h4></div>
+  <div class="card-body">
+    <p><strong> Ubicación:</strong> {{ object.ubicacion|default:"Sin ubicación" }}</p>
+    <p><strong> Fecha:</strong> {{ object.fecha|date:"d/m/Y H:i" }}</p>
+    <p><strong> Organizador:</strong> {{ object.organizador.username }}</p>
+    <div class="mt-3 d-flex gap-2">
+      {% if user.is_authenticated and perms.gestion.change_evento %}
+        {% if user.is_staff or user.is_superuser or object.organizador_id == user.id %}
+          <a class="btn btn-outline-secondary btn-sm" href="{% url 'evento_update' pk=object.pk %}"> Editar</a>
+        {% endif %}
+      {% endif %}
+      {% if user.is_authenticated and perms.gestion.delete_evento %}
+        {% if user.is_staff or user.is_superuser or object.organizador_id == user.id %}
+          <a class="btn btn-outline-danger btn-sm" href="{% url 'evento_delete' pk=object.pk %}"> Eliminar</a>
+        {% endif %}
+      {% endif %}
+      <a class="btn btn-secondary btn-sm" href="{% url 'evento_list' %}"> Volver</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

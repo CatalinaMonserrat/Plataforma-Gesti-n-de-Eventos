@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center">
+  <div class="card shadow-sm w-100" style="max-width: 480px;">
+    <div class="card-header bg-primary text-white"><h4 class="mb-0">Crear cuenta</h4></div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">{{ form.username.label_tag }} {{ form.username }} {{ form.username.errors }}</div>
+        <div class="mb-3">{{ form.password1.label_tag }} {{ form.password1 }} {{ form.password1.errors }}</div>
+        <div class="mb-3">{{ form.password2.label_tag }} {{ form.password2 }} {{ form.password2.errors }}</div>
+        <button class="btn btn-success w-100">Registrarme</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
